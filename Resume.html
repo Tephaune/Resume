@@ -79,8 +79,62 @@
             color: #f4f4f4;
         }
 
-        a {
-            color: #2980b9; 
+        .carousel-container {
+            position: relative;
+            width: 220px; /* Adjust width to match one image */
+            margin: 20px auto;
+            overflow: hidden;
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel img {
+            width: 200px;
+            margin: 0 10px;
+        }
+
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: 30px;
+            height: 30px;
+            margin-top: -15px;
+            background-color: #444;
+            color: white;
+            border: none;
+            outline: none;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+
+        .prev:hover, .next:hover {
+            opacity: 1;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+        /* Style for the experience section */
+        .experience {
+            display: flex;
+            justify-content: center; /* Centers the content horizontally */
+            align-items: center; /* Centers the content vertically */
+            flex-direction: column; /* Keeps text and heading vertical */
+            text-align: center; /* Centers the text inside */
+            background-color: #2c2c2c;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            margin: 20px auto;
+            width: 70%; /* Adjust this width as needed */
         }
     </style>
 </head>
@@ -94,7 +148,7 @@
 
         <div class="contact-info">
             <p>9679 Egoli Estate, Belmopan</p>
-            <p>Student at the <a href="https://www.ub.com/">University of Belize!</a></p>
+            <p>Student at the <a href="https://www.ubelearn.com/">University of Belize!</a></p>
         </div>
 
         <div class="skills">
@@ -123,11 +177,42 @@
             </table>
         </div>
 
-        <div class="university">
-            <img src="ub.jfif" alt="University of Belize" style="display: block; margin: 20px auto; width: 200px;">
+        <!-- Experience Section -->
+        <div class="experience">
+            <h2>Experience</h2>
+            <p>As a dedicated and tech-savvy 16-year-old, I am passionate about pursuing an Associate Degree in 
+            Information Technology to deepen my understanding of computer systems, programming, and digital innovation. 
+            My ambition stems from a strong interest in technology and problem-solving, 
+            which I have developed through hands-on experience with coding and IT-related projects. 
+            I am eager to build a career in this fast-paced, ever-evolving field, 
+            where I can combine my creativity and technical skills to contribute to meaningful technological advancements. 
+            By earning this degree, I aim to lay a solid foundation for future growth and opportunities in the tech industry.</p>
+        </div>
+
+        <!-- Carousel for scrolling images -->
+        <div class="carousel-container">
+            <div class="carousel">
+                <img src="ub.jfif" alt="University of Belize">
+                <img src="ub1.jpg" alt="Image 1">
+                <img src="ub2.jpg" alt="Image 2">
+                <img src="ub3.jpg" alt="Image 3">
+            </div>
+            <button class="prev" onclick="moveCarousel(-1)">&#10094;</button>
+            <button class="next" onclick="moveCarousel(1)">&#10095;</button>
         </div>
     </div>
 
+    <script>
+        let currentSlide = 0;
+        
+        function moveCarousel(direction) {
+            const carousel = document.querySelector('.carousel');
+            const images = document.querySelectorAll('.carousel img');
+            const totalImages = images.length;
+            currentSlide = (currentSlide + direction + totalImages) % totalImages;
+            const offset = -currentSlide * (images[0].offsetWidth + 20); // 20px is for margin between images
+            carousel.style.transform = `translateX(${offset}px)`;
+        }
+    </script>
 </body>
 </html>
-
